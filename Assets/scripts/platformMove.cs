@@ -39,7 +39,7 @@ public class platformMove : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            var newPlat = Instantiate(gameObject, new Vector3(gameObject.transform.position.x -3, gameObject.transform.position.y + 1, gameObject.transform.position.z), gameObject.transform.rotation);
+            var newPlat = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + Random.Range(-2, 2), gameObject.transform.position.y + Random.Range(1,3), gameObject.transform.position.z), gameObject.transform.rotation);
             newPlat.transform.parent = empty.transform;
         }
         changeDirection();
