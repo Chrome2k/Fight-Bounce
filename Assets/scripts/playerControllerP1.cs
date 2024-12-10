@@ -1,10 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Search;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class playerControllerP1 : MonoBehaviour
 {
