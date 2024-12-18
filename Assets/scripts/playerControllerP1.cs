@@ -18,7 +18,7 @@ public class playerControllerP1 : MonoBehaviour
     [Header("Bools")]
     public bool isGrounded = true;
     private bool bigJump;
-    public bool sheild = false;
+    public bool shield = false;
     [Header("Particles")]
     public ParticleSystem clashParticle;
     //vectors
@@ -31,24 +31,26 @@ public class playerControllerP1 : MonoBehaviour
         jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
         horizontal = Input.GetAxisRaw("HorizontalP1") * playerSpeed * Time.deltaTime;
         transform.Translate(Vector3.right * horizontal);
-        if (Input.GetKeyDown("e") && sheild != true)
+        if (Input.GetKeyDown("e") && shield != true)
         {
             weapon.GetComponent<attack1>().whack();
         }
-        if (Input.GetKeyDown("s"))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            sheild = true;
+            shield = true;
             playerSpeed = 2f;
         }
         if (Input.GetKeyUp("s"))
         {
-            sheild = false;
-            sheild = false;
+            shield = false;
+            shield = false;
             weapon.SetActive(false);
             playerSpeed = 6f;
         }
@@ -72,7 +74,7 @@ public class playerControllerP1 : MonoBehaviour
         {
             bigJump = false;
         }
-        if (sheild == true)
+        if (shield == true)
         {
             weapon.SetActive(true);
         }
@@ -84,7 +86,7 @@ public class playerControllerP1 : MonoBehaviour
         {
             weapon.GetComponent<attack1>().direction = -1;
         }
-        if (Input.GetKeyDown("q") && !sheild)
+        if (Input.GetKeyDown("q") && !shield)
         {
             projectile.GetComponent<projectileController>().Throw();
         }
@@ -101,7 +103,7 @@ public class playerControllerP1 : MonoBehaviour
         {
             isGrounded = true;
         }
-        if (collision.gameObject.tag == "projectile" && !sheild)
+        if (collision.gameObject.tag == "projectile" && !shield)
         {
             rb.AddForce((transform.position.x - collision.transform.position.x) * 2.5f, (transform.position.y - collision.transform.position.y)*3, 0, ForceMode.Impulse);
         }
@@ -115,13 +117,13 @@ public class playerControllerP1 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-      if(other.gameObject.tag == "hurt2" && sheild == false && player2.GetComponent<playerControllerP2>().sheild == false)
+      if(other.gameObject.tag == "hurt2" && shield == false && player2.GetComponent<playerControllerP2>().shield == false)
       {
             gameObject.SetActive(false);
             GameController.GetComponent<gameController>().score2Plus();
             GameController.GetComponent<gameController>().Restart();
         }
-      else if (other.gameObject.tag == "hurt2" && sheild == true && player2.GetComponent<playerControllerP2>().sheild == false)
+      else if (other.gameObject.tag == "hurt2" && shield == true && player2.GetComponent<playerControllerP2>().shield == false)
       {
             clashParticle.Play();
             rb.AddForce(2.5f * weapon.GetComponent<attack1>().direction * -1, 2, 0, ForceMode.Impulse);
