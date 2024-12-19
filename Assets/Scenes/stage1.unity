@@ -722,7 +722,8 @@ MonoBehaviour:
   jumpPower: 2
   rb: {fileID: 377242594}
   isGrounded: 0
-  sheild: 0
+  shield: 0
+  tutorial: 0
   clashParticle: {fileID: 1701947403}
 --- !u!1 &414640338
 GameObject:
@@ -6259,7 +6260,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!135 &800424783
 SphereCollider:
@@ -17071,7 +17072,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 8
   m_CollisionDetection: 0
 --- !u!135 &2028581986
 SphereCollider:
@@ -17185,7 +17186,7 @@ MonoBehaviour:
   jumpPower: 2
   rb: {fileID: 2075577982}
   isGrounded: 0
-  sheild: 0
+  shield: 0
   clashParticle: {fileID: 414640341}
 --- !u!54 &2075577982
 Rigidbody:

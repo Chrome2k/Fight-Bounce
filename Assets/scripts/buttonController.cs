@@ -14,6 +14,6 @@ public class buttonController : MonoBehaviour
     }
     private void click()
     {
-            SceneManager.LoadScene(nextStage);
+        SceneManager.LoadScene(nextStage);
     }
 }

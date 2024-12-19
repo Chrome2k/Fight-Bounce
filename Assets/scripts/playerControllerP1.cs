@@ -19,6 +19,7 @@ public class playerControllerP1 : MonoBehaviour
     public bool isGrounded = true;
     private bool bigJump;
     public bool shield = false;
+    public bool tutorial = false;
     [Header("Particles")]
     public ParticleSystem clashParticle;
     //vectors
@@ -49,7 +50,6 @@ public class playerControllerP1 : MonoBehaviour
         }
         if (Input.GetKeyUp("s"))
         {
-            shield = false;
             shield = false;
             weapon.SetActive(false);
             playerSpeed = 6f;
@@ -92,9 +92,17 @@ public class playerControllerP1 : MonoBehaviour
         }
         if (transform.position.y < -2)
         {
-            GameController.GetComponent<gameController>().Restart();
-            gameObject.SetActive(false);
-            GameController.GetComponent<gameController>().score2Plus();
+            if (!tutorial)
+            {
+                GameController.GetComponent<gameController>().Restart();
+                gameObject.SetActive(false);
+                GameController.GetComponent<gameController>().score2Plus();
+            }
+            else
+            {
+                GameController.GetComponent<tutorialController>().Restart();
+                gameObject.SetActive(false);
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -117,16 +125,31 @@ public class playerControllerP1 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-      if(other.gameObject.tag == "hurt2" && shield == false && player2.GetComponent<playerControllerP2>().shield == false)
-      {
-            gameObject.SetActive(false);
-            GameController.GetComponent<gameController>().score2Plus();
-            GameController.GetComponent<gameController>().Restart();
+        if (!tutorial)
+        {
+            if (other.gameObject.tag == "hurt2" && shield == false && player2.GetComponent<playerControllerP2>().shield == false)
+            {
+                gameObject.SetActive(false);
+                GameController.GetComponent<gameController>().score2Plus();
+                GameController.GetComponent<gameController>().Restart();
+            }
+            else if (other.gameObject.tag == "hurt2" && shield == true && player2.GetComponent<playerControllerP2>().shield == false)
+            {
+                clashParticle.Play();
+                rb.AddForce(2.5f * weapon.GetComponent<attack1>().direction * -1, 2, 0, ForceMode.Impulse);
+            }
         }
-      else if (other.gameObject.tag == "hurt2" && shield == true && player2.GetComponent<playerControllerP2>().shield == false)
-      {
-            clashParticle.Play();
-            rb.AddForce(2.5f * weapon.GetComponent<attack1>().direction * -1, 2, 0, ForceMode.Impulse);
-      }
+        else
+        {
+            if (other.gameObject.tag == "hurt2" && shield == false && player2.GetComponent<dummyController>().shield == false)
+            {
+                GameController.GetComponent<tutorialController>().Restart();
+            }
+            else if (other.gameObject.tag == "hurt2" && shield == true && player2.GetComponent<dummyController>().shield == false)
+            {
+                clashParticle.Play();
+                rb.AddForce(2.5f * weapon.GetComponent<attack1>().direction * -1, 2, 0, ForceMode.Impulse);
+            }
+        }
     }
 }

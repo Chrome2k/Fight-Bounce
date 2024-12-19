@@ -96,10 +96,6 @@ public class playerControllerP2 : MonoBehaviour
             GameController.GetComponent<gameController>().score1Plus();
         }
     }
-    private void bigJumpOff()
-    {
-        bigJump = false;
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "floor")
