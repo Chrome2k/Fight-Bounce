@@ -143,11 +143,11 @@ public class playerControllerP1 : MonoBehaviour
         {
             if (other.gameObject.tag == "hurt2" && shield == false && player2.GetComponent<dummyController>().shield == false)
             {
+                gameObject.SetActive(false);
                 GameController.GetComponent<tutorialController>().Restart();
             }
             else if (other.gameObject.tag == "hurt2" && shield == true && player2.GetComponent<dummyController>().shield == false)
             {
-                clashParticle.Play();
                 rb.AddForce(2.5f * weapon.GetComponent<attack1>().direction * -1, 2, 0, ForceMode.Impulse);
             }
         }
