@@ -7,7 +7,8 @@ public class controlUIController : MonoBehaviour
 {
     private Button button;
     public GameObject otherUI;
-    public GameObject controlUI;
+    public GameObject otherUI2;
+    public GameObject onUI;
     public GameObject buttonText;
     private bool isTitle = true;
     // Start is called before the first frame update
@@ -24,14 +25,16 @@ public class controlUIController : MonoBehaviour
         {
             isTitle = false;
             otherUI.SetActive(false);
-            controlUI.SetActive(true);
+            otherUI2.SetActive(false);
+            onUI.SetActive(true);
             buttonText.GetComponent<TextMeshProUGUI>().SetText("Go Back");
         }
         else
         {
             isTitle = true;
             otherUI.SetActive(true);
-            controlUI.SetActive(false);
+            otherUI2.SetActive(true);
+            onUI.SetActive(false);
             buttonText.GetComponent<TextMeshProUGUI>().SetText("Controls");
         }
     }
