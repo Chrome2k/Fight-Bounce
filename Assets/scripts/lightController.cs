@@ -28,11 +28,11 @@ public class lightController : MonoBehaviour
     {
         if(!outerSphereCollider.GetComponent<sphereCollidersController>().isColliding)
         {
-            outerSphereCollider.radius += 0.01f;
+            outerSphereCollider.radius += 0.02f;
         }
         if(innerSphereCollider.GetComponent<sphereCollidersController>().isColliding && outerSphereCollider.radius > 0.01f)
         {
-            outerSphereCollider.radius -= 0.01f;
+            outerSphereCollider.radius -= 0.02f;
         }
         innerSphereCollider.radius = outerSphereCollider.radius - sphereColliderDifference;
         spotLight.spotAngle = outerSphereCollider.radius * lightRadiusRatio + lightRadiusOffset;

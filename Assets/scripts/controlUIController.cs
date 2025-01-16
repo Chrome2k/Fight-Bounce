@@ -10,6 +10,7 @@ public class controlUIController : MonoBehaviour
     public GameObject otherUI2;
     public GameObject onUI;
     public GameObject buttonText;
+    public string originalText = "";
     private bool isTitle = true;
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,9 @@ public class controlUIController : MonoBehaviour
         {
             isTitle = true;
             otherUI.SetActive(true);
-            otherUI2.SetActive(true);
+            //otherUI2.SetActive(true);
             onUI.SetActive(false);
-            buttonText.GetComponent<TextMeshProUGUI>().SetText("Controls");
+            buttonText.GetComponent<TextMeshProUGUI>().SetText(originalText);
         }
     }
 }
