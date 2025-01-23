@@ -38,28 +38,28 @@ public class playerControllerP2 : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("HorizontalP2") * playerSpeed * Time.deltaTime;
         transform.Translate(Vector3.right * horizontal);
-        if (Input.GetKeyDown("right ctrl") && shield != true)
+        if (Input.GetKeyDown(KeyCode.Period) && shield != true)
         {
             weapon.GetComponent<attack1>().whack();
         }
-        if (Input.GetKeyDown("down"))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             shield = true;
             playerSpeed = 2f;
         }
-        if (Input.GetKeyUp("down"))
+        if (Input.GetKeyUp(KeyCode.K))
         {
             weapon.SetActive(false);
             playerSpeed = 6f;
             shield = false;
         }
-        if (Input.GetKeyDown("up") && isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.I) && isGrounded == true)
         {
             timer = 0f;
             bigJump = true;
             rb.AddForce(jump * jumpPower, ForceMode.Impulse);
         }
-        else if (bigJump == true && Input.GetKey("up"))
+        else if (bigJump == true && Input.GetKey(KeyCode.I))
         {
             timer += Time.deltaTime;
             if (timer > 0.15f)
@@ -85,7 +85,7 @@ public class playerControllerP2 : MonoBehaviour
         {
             weapon.GetComponent<attack1>().direction = -1;
         }
-        if(Input.GetKey("right shift") && !shield)
+        if(Input.GetKey(KeyCode.Slash) && !shield)
         { 
             projectile.GetComponent<projectileController>().Throw();
         }

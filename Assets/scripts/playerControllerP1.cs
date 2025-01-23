@@ -39,7 +39,7 @@ public class playerControllerP1 : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("HorizontalP1") * playerSpeed * Time.deltaTime;
         transform.Translate(Vector3.right * horizontal);
-        if (Input.GetKeyDown("e") && shield != true)
+        if (Input.GetKeyDown(KeyCode.C) && shield != true)
         {
             weapon.GetComponent<attack1>().whack();
         }
@@ -48,19 +48,19 @@ public class playerControllerP1 : MonoBehaviour
             shield = true;
             playerSpeed = 2f;
         }
-        if (Input.GetKeyUp("s"))
+        if (Input.GetKeyUp(KeyCode.S))
         {
             shield = false;
             weapon.SetActive(false);
             playerSpeed = 6f;
         }
-        if (Input.GetKeyDown("w") && isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded == true)
         {
             timer = 0f;
             bigJump = true;
             rb.AddForce(jump * jumpPower, ForceMode.Impulse);
         }
-        else if (bigJump == true && Input.GetKey("w"))
+        else if (bigJump == true && Input.GetKey(KeyCode.W))
         {
             timer += Time.deltaTime;
             if (timer > 0.15f)
@@ -86,7 +86,7 @@ public class playerControllerP1 : MonoBehaviour
         {
             weapon.GetComponent<attack1>().direction = -1;
         }
-        if (Input.GetKeyDown("q") && !shield)
+        if (Input.GetKeyDown(KeyCode.V) && !shield)
         {
             projectile.GetComponent<projectileController>().Throw();
         }
