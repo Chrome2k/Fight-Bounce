@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class music : MonoBehaviour
 {
+    private static bool musicPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-    }
+        DontDestroyOnLoad(gameObject);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (musicPlaying == false)
+        {
+            musicPlaying = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

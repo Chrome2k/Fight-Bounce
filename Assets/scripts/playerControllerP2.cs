@@ -19,7 +19,7 @@ public class playerControllerP2 : MonoBehaviour
     public Rigidbody rb;
     [Header("Bools")]
     public bool isGrounded = true;
-    private bool bigJump;
+    private bool bigJump = false;
     public bool shield = false;
     [Header("Particles")]
     public ParticleSystem clashParticle;
@@ -53,10 +53,14 @@ public class playerControllerP2 : MonoBehaviour
             playerSpeed = 6f;
             shield = false;
         }
-        if (Input.GetKeyDown(KeyCode.I) && isGrounded == true)
+        if (Input.GetKey(KeyCode.I) && isGrounded == true)
         {
+            if (Input.GetKeyDown(KeyCode.I) && isGrounded == true)
+            {
+                bigJump = true;
+            }
+            isGrounded = false;
             timer = 0f;
-            bigJump = true;
             rb.AddForce(jump * jumpPower, ForceMode.Impulse);
         }
         else if (bigJump == true && Input.GetKey(KeyCode.I))

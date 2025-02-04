@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class platformMove : MonoBehaviour
 {
+    private float timer = 0;
     private const float minX = -8.45f;
     private const float maxX = 8.45f;
     private const float minY = 2.88f;
     private const float maxY = 7.5f;
     private float directionX = 0;
     private float directionY = 0;
-    private bool outOfBounds = false;
     public GameObject empty;
     // Start is called before the first frame update
     void Start()
@@ -24,24 +24,21 @@ public class platformMove : MonoBehaviour
     {
         transform.Translate(Vector3.right * directionX);
         transform.Translate(Vector3.up * directionY);
-        if (transform.localPosition.x < minX || transform.localPosition.x > maxX || transform.localPosition.y < minY || transform.localPosition.y > maxY && !outOfBounds)
+        if (transform.localPosition.x < minX || transform.localPosition.x > maxX || transform.localPosition.y < minY || transform.localPosition.y > maxY)
         {
-            outOfBounds = true;
             directionX *= -1;
             directionY *= -1;
         }
-        else
+        timer += Time.deltaTime;
+        if(timer >= 3)
         {
-            outOfBounds = false;
+            var newPlat = Instantiate(gameObject, new Vector3(Random.Range(4,8), 3, gameObject.transform.position.z), gameObject.transform.rotation);
+            newPlat.transform.parent = empty.transform;
+            timer = 0;
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            var newPlat = Instantiate(gameObject, new Vector3(gameObject.transform.position.x + Random.Range(-2, 2), gameObject.transform.position.y + Random.Range(1,3), gameObject.transform.position.z), gameObject.transform.rotation);
-            newPlat.transform.parent = empty.transform;
-        }
         changeDirection();
     }
     private void OnTriggerEnter(Collider other)
@@ -52,5 +49,9 @@ public class platformMove : MonoBehaviour
     {
         directionX = Random.Range(-2, 2) * Time.deltaTime;
         directionY = Random.Range(-2, 2) * Time.deltaTime;
+        if(directionX == 0 || directionY == 0)
+        {
+            changeDirection();
+        }
     }
 }
